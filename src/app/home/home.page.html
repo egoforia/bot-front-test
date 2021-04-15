@@ -21,4 +21,10 @@
       <app-sale-item *ngFor="let sale of sales" [sale]="sale"></app-sale-item>
     </div>
   </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="presentAddSaleModal()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

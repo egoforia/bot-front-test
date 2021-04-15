@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { SaleItemModule } from '../components/sale-item/sale-item.module';
+import { AddSaleModalModule } from '../components/add-sale-modal/add-sale-modal.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SaleItemModule } from '../components/sale-item/sale-item.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    SaleItemModule
+    SaleItemModule,
+    AddSaleModalModule
   ],
   declarations: [HomePage]
 })
