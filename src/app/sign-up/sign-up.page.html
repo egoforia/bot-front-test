@@ -48,6 +48,7 @@
         </ion-item>
         <ion-label color="danger" class="error-message" *ngIf="cpassword.invalid && cpassword.dirty">
           <span *ngIf="cpassword.errors.required">Este é um campo obrigatório</span>
+          <span *ngIf="cpassword.errors.mustMatch">Confirmação de senha está incorreta</span>
         </ion-label>
         <ion-row>
           <ion-col size="6">
