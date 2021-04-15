@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { SaleItemModule } from '../components/sale-item/sale-item.module';
+import { AddSaleModalModule } from '../components/add-sale-modal/add-sale-modal.module';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    SaleItemModule,
+    AddSaleModalModule
   ],
   declarations: [HomePage]
 })
