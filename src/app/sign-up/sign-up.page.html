@@ -5,5 +5,62 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-grid fixed>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <ion-list>
+        <!-- name -->
+        <ion-item>
+          <ion-label position="floating">Nome e sobrenome</ion-label>
+          <ion-input formControlName="name" placeholder="Digite aqui"></ion-input>
+        </ion-item>
+        <ion-label color="danger" class="error-message" *ngIf="name.invalid && name.dirty">
+          <span *ngIf="name.errors.required">Este é um campo obrigatório</span>
+        </ion-label>
+        <!-- cpf -->
+        <ion-item>
+          <ion-label position="floating">CPF</ion-label>
+          <ion-input formControlName="cpf" placeholder="Digite aqui"></ion-input>
+        </ion-item>
+        <ion-label color="danger" class="error-message" *ngIf="cpf.invalid && cpf.dirty">
+          <span *ngIf="cpf.errors.required">Este é um campo obrigatório</span>
+        </ion-label>
+        <!-- email -->
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="email" placeholder="Digite aqui"></ion-input>
+        </ion-item>
+        <ion-label color="danger" class="error-message" *ngIf="email.invalid && email.dirty">
+          <span *ngIf="email.errors.required">Este é um campo obrigatório</span>
+        </ion-label>
+        <!-- password -->
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input formControlName="password" type="password" placeholder="Digite aqui"></ion-input>
+        </ion-item>
+        <ion-label color="danger" class="error-message" *ngIf="password.invalid && password.dirty">
+          <span *ngIf="password.errors.required">Este é um campo obrigatório</span>
+        </ion-label>
+        <!-- cpassword -->
+        <ion-item>
+          <ion-label position="floating">Confirmação de senha</ion-label>
+          <ion-input formControlName="cpassword" type="password" placeholder="Digite aqui"></ion-input>
+        </ion-item>
+        <ion-label color="danger" class="error-message" *ngIf="cpassword.invalid && cpassword.dirty">
+          <span *ngIf="cpassword.errors.required">Este é um campo obrigatório</span>
+        </ion-label>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="block" fill="outline" type="submit" (click)="goToLoginPage()">
+              <ion-label>Já tenho cadastro</ion-label>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="block" type="submit" [disabled]="form.invalid">
+              <ion-label>Cadastrar</ion-label>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </form>
+  </ion-grid>
 </ion-content>
