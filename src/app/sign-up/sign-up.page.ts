@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MASKS, NgBrazilValidators } from 'ng-brazil';
 import { MustMatch } from '../validators/must-match.validator';
 
 @Component({
@@ -8,6 +9,8 @@ import { MustMatch } from '../validators/must-match.validator';
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage implements OnInit {
+
+  public MASKS = MASKS;
 
   constructor(
     private fb: FormBuilder
@@ -18,7 +21,7 @@ export class SignUpPage implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       'name':       [ null, [ Validators.required ] ],
-      'cpf':        [ null, [ Validators.required ] ],
+      'cpf':        [ null, [ Validators.required, NgBrazilValidators.cpf ] ],
       'email':      [ null, [ Validators.required, Validators.email ]],
       'password':   [ null, [ Validators.required, Validators.minLength(8) ] ],
       'cpassword':  [ null, [] ]
@@ -48,7 +51,7 @@ export class SignUpPage implements OnInit {
   }
 
   goToLoginPage() {
-    
+
   }
 
   submit() {
