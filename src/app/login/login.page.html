@@ -5,5 +5,38 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-grid fixed>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <ion-list>
+        <!-- email -->
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="email" placeholder="Digite aqui"></ion-input>
+        </ion-item>
+        <ion-label color="danger" class="error-message" *ngIf="email.invalid && email.dirty">
+          <span *ngIf="email.errors.required">Este é um campo obrigatório</span>
+        </ion-label>
+        <!-- password -->
+        <ion-item>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input formControlName="password" type="password" placeholder="Digite aqui"></ion-input>
+        </ion-item>
+        <ion-label color="danger" class="error-message" *ngIf="password.invalid && password.dirty">
+          <span *ngIf="password.errors.required">Este é um campo obrigatório</span>
+        </ion-label>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button expand="block" fill="outline" type="submit" (click)="goToSignUpPage()">
+              <ion-label>Quero ser um revendedor</ion-label>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button expand="block" type="submit" [disabled]="form.invalid">
+              <ion-label>Entrar</ion-label>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-list>
+    </form>
+  </ion-grid>
 </ion-content>

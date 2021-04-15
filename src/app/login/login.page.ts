@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router
+  ) { }
+
+  form: FormGroup;
 
   ngOnInit() {
+    this.form = this.fb.group({
+      'email':    [ null, [ Validators.required, Validators.email ] ],
+      'password': [ null, [ Validators.required ] ]
+    });
+  }
+
+  get email(): AbstractControl {
+    return this.form.controls.email;
+  }
+
+  get password(): AbstractControl {
+    return this.form.controls.password;
+  }
+
+  goToSignUpPage() {
+    this.router.navigate(['sign-up']);
+  }
+
+  submit() {
+    if (this.form.valid) {
+
+    }
   }
 
 }
