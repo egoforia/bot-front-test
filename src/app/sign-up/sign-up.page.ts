@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MASKS, NgBrazilValidators } from 'ng-brazil';
 import { MustMatch } from '../validators/must-match.validator';
 
@@ -13,7 +14,8 @@ export class SignUpPage implements OnInit {
   public MASKS = MASKS;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { }
 
   form: FormGroup;
@@ -51,7 +53,7 @@ export class SignUpPage implements OnInit {
   }
 
   goToLoginPage() {
-
+    this.router.navigate(['login']);
   }
 
   submit() {
