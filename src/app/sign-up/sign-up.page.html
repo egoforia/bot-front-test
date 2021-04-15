@@ -19,10 +19,11 @@
         <!-- cpf -->
         <ion-item>
           <ion-label position="floating">CPF</ion-label>
-          <ion-input formControlName="cpf" placeholder="Digite aqui"></ion-input>
+          <ion-input formControlName="cpf" placeholder="Digite aqui" [ionMask]="MASKS.cpf.textMask"></ion-input>
         </ion-item>
         <ion-label color="danger" class="error-message" *ngIf="cpf.invalid && cpf.dirty">
           <span *ngIf="cpf.errors.required">Este é um campo obrigatório</span>
+          <span *ngIf="cpf.errors.cpf">CPF incorreto</span>
         </ion-label>
         <!-- email -->
         <ion-item>
