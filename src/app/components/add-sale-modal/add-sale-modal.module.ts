@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddSaleModalComponent } from './add-sale-modal.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 
@@ -10,7 +10,8 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    ReactiveFormsModule
   ],
   declarations: [AddSaleModalComponent],
   exports: [AddSaleModalComponent],
