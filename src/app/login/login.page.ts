@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       'email':    [ null, [ Validators.required, Validators.email ] ],
-      'password': [ null, [ Validators.required ] ]
+      'password': [ null, [ Validators.required, Validators.minLength(8) ] ]
     });
   }
 
@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
 
   submit() {
     if (this.form.valid) {
-
+      this.router.navigate(['home'], { replaceUrl: true });
     }
   }
 
