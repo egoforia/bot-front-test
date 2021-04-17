@@ -16,10 +16,10 @@
         <!-- id -->
         <ion-item>
           <ion-label position="floating">Código da compra</ion-label>
-          <ion-input formControlName="email" type="number" placeholder="Digite aqui"></ion-input>
+          <ion-input formControlName="code" type="text" placeholder="Digite aqui"></ion-input>
         </ion-item>
-        <ion-label color="danger" class="error-message" *ngIf="id.invalid && id.dirty">
-          <span *ngIf="id.errors.required">Este é um campo obrigatório</span>
+        <ion-label color="danger" class="error-message" *ngIf="code.invalid && code.dirty">
+          <span *ngIf="code.errors.required">Este é um campo obrigatório</span>
         </ion-label>
         <!-- price -->
         <ion-item>
