@@ -28,7 +28,9 @@ export class AuthService {
 
     return this.http.post(environment.apiUrl + endpoint, { email, password })
       .toPromise()
-      .then((user: any) => {
+      .then((user: User) => {
+        // hack for fake api
+        user.name = 'John Doe';
         return user;
       });
   }
