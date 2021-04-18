@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Sale, SaleStatus } from '../api-interfaces/sale';
 import { AddSaleModalComponent } from '../components/add-sale-modal/add-sale-modal.component';
+import { BalanceService } from '../services/balance.service';
+import { SaleService } from '../services/sale.service';
 
 @Component({
   selector: 'app-home',
@@ -11,16 +13,24 @@ import { AddSaleModalComponent } from '../components/add-sale-modal/add-sale-mod
 export class HomePage implements OnInit {
 
   constructor(
+    private saleService: SaleService,
+    private balanceService: BalanceService,
     private modalCtrl: ModalController
   ) {}
 
-  sales: Sale[] = [
-    { id: 1, price: 99.99, date: new Date('2021-04-15'), cashback: 9.99, status: SaleStatus.WAITING },
-    { id: 2, price: 99.99, date: new Date('2021-04-15'), cashback: 9.99, status: SaleStatus.DENIED },
-    { id: 3, price: 99.99, date: new Date('2021-04-15'), cashback: 9.99, status: SaleStatus.APPROVED },
-  ]
+  sales: Sale[];
+  balanceTotal: number;
 
   ngOnInit() {
+
+  }
+
+  async ionViewDidEnter() {
+    this.sales = await this.saleService.getList();
+    this.balanceTotal = await this.balanceService.getUserBalance(1);
+  }
+
+  getSales() {
 
   }
 
@@ -28,6 +38,13 @@ export class HomePage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: AddSaleModalComponent
     });
+
+    modal.onWillDismiss()
+      .then(response => {
+        if (response.data && response.data.sale) {
+          this.sales.push(response.data.sale);
+        }
+      });
 
     modal.present();
   }
