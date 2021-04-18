@@ -18,7 +18,7 @@ export class SaleItemComponent implements OnInit {
     return SaleStatus[ this.sale.status ];
   }
 
-  get cashbackPercentage(): string {
-    return (this.sale.price / this.sale.cashback).toFixed(2);
+  get cashbackPercentage(): number {
+    return (this.sale.cashback * 100 / this.sale.price);
   }
 }

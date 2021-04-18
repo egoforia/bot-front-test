@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { loadBalanceComplete } from '../actions/balance.actions';
+import { addSaleCashback, loadBalanceComplete } from '../actions/balance.actions';
 import { Balance } from '../api-interfaces/balance';
 
 
@@ -16,7 +16,8 @@ export const initialState: BalanceState = {
 
 const reducer = createReducer(
   initialState,
-  on(loadBalanceComplete, (state: BalanceState, { balance }) => { return { ...state, balance }; })
+  on(loadBalanceComplete, (state: BalanceState, { balance }) => { return { ...state, balance }; }),
+  on(addSaleCashback, (state: BalanceState, { cashback }) => { return { ...state, balance: { ...state.balance, total: state.balance.total + cashback } }; }) 
 );
 
 export function balanceReducer(state: BalanceState, action: Action) {

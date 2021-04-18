@@ -3,7 +3,8 @@ import { LoadingController, ModalController, ToastController } from '@ionic/angu
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { EMPTY, of } from 'rxjs';
-import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { addSaleCashback } from '../actions/balance.actions';
 import { createSaleComplete, createSaleFailed, loadSalesComplete } from '../actions/sale.actions';
 import { SaleState } from '../reducers/sale.reducer';
 import { SaleService } from '../services/sale.service';
@@ -45,7 +46,9 @@ export class SaleEffects {
 
         this.loading.then((loading) => loading.present());
 
-        return this.saleService.create(action.sale).pipe(
+        const cashback = action.sale.price * 0.05;
+
+        return this.saleService.create({ ...action.sale, cashback, status: 'WAITING' }).pipe(
           map(sale => createSaleComplete({ sale })),
           catchError(error => of(createSaleFailed({ error })))
         );
@@ -70,6 +73,8 @@ export class SaleEffects {
         toast.present();
 
         this.modalCtrl.dismiss();
+
+        this.store.dispatch(addSaleCashback({ cashback: action.sale.cashback }));
       })
     ),
     { dispatch: false }

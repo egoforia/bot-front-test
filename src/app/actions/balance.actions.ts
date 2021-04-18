@@ -9,3 +9,9 @@ export const loadBalanceComplete = createAction(
   '[Balance] Load Balance Complete',
   props<{ balance: Balance }>()
 );
+
+export const addSaleCashback = createAction(
+  '[Balance] Add Sale Cashback',
+  props<{ cashback: number }>()
+);
+
