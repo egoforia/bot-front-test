@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../api-interfaces/user';
 
@@ -23,15 +24,9 @@ export class AuthService {
       });
   }
 
-  login(email: string, password: string): Promise<User> {
+  login(email: string, password: string): Observable<User> {
     const endpoint = 'login';
 
-    return this.http.post(environment.apiUrl + endpoint, { email, password })
-      .toPromise()
-      .then((user: User) => {
-        // hack for fake api
-        user.name = 'John Doe';
-        return user;
-      });
+    return this.http.post<User>(environment.apiUrl + endpoint, { email, password });
   }
 }

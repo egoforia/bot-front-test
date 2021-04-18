@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Sale } from '../api-interfaces/sale';
 
@@ -12,19 +13,15 @@ export class SaleService {
     private http: HttpClient
   ) { }
 
-  getList(): Promise<Sale[]> {
+  getAll(): Observable<Sale[]> {
     const endpoint = 'sales';
 
-    return this.http.get(environment.apiUrl + endpoint)
-      .toPromise()
-      .then((sales: Sale[]) => sales);
+    return this.http.get<Sale[]>(environment.apiUrl + endpoint);
   }
 
-  create(sale: Sale): Promise<Sale> {
+  create(sale: Sale): Observable<Sale> {
     const endpoint = 'sales';
 
-    return this.http.post(environment.apiUrl + endpoint, sale)
-      .toPromise()
-      .then((sale: Sale) => sale);
+    return this.http.post<Sale>(environment.apiUrl + endpoint, sale)
   }
 }

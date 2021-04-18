@@ -12,6 +12,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { authReducer } from './reducers/auth.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './effects/auth.effects';
+import { SaleEffects } from './effects/sale.effects';
+import { BalanceEffects } from './effects/balance.effects';
 
 registerLocaleData(ptBr);
 
@@ -24,7 +33,10 @@ registerLocaleData(ptBr);
     AppRoutingModule,
     TextMaskModule,
     NgBrazil,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([AuthEffects, SaleEffects, BalanceEffects])
   ],
   providers: [
     { 

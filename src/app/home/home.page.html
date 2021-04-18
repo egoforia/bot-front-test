@@ -13,12 +13,12 @@
         <h1>Suas compras</h1>
       </ion-col>
       <ion-col size="6" class="ion-text-end">
-        Saldo: {{ balanceTotal | currency:'BRL' }}
+        Saldo: {{ (balance$ | async)?.total | currency:'BRL' }}
       </ion-col>
     </ion-row>
 
     <div>
-      <app-sale-item *ngFor="let sale of sales" [sale]="sale"></app-sale-item>
+      <app-sale-item *ngFor="let sale of (sales$ | async | keyvalue)" [sale]="sale.value"></app-sale-item>
     </div>
   </ion-grid>
 
