@@ -13,7 +13,7 @@
         <h1>Suas compras</h1>
       </ion-col>
       <ion-col size="6" class="ion-text-end">
-        Saldo: {{ balanceTotal | currency:'BRL' }}
+        Saldo: {{ (balance$ | async)?.total | currency:'BRL' }}
       </ion-col>
     </ion-row>
 

@@ -11,6 +11,9 @@ import { SaleService } from '../services/sale.service';
 
 import * as fromSales from '../reducers/sale.reducer';
 import { Dictionary } from '@ngrx/entity';
+import { Balance } from '../api-interfaces/balance';
+import { loadBalance } from '../actions/balance.actions';
+import { BalanceState } from '../reducers/balance.reducer';
 
 @Component({
   selector: 'app-home',
@@ -20,23 +23,23 @@ import { Dictionary } from '@ngrx/entity';
 export class HomePage implements OnInit {
 
   constructor(
-    private saleService: SaleService,
-    private balanceService: BalanceService,
     private modalCtrl: ModalController,
-    private readonly store: Store<{ saleState: SaleState }>
+    private readonly store: Store<{ saleState: SaleState, balanceState: BalanceState }>
   ) {}
 
   sales$: Observable<Dictionary<Sale>>;
-  balanceTotal: number;
+  balance$: Observable<Balance>;
 
   ngOnInit() {
     this.sales$ = this.store.select(state => state.saleState.entities);
+    this.balance$ = this.store.select(state => state.balanceState.balance);
     this.store.dispatch(loadSales());
+    this.store.dispatch(loadBalance());
   }
 
   async ionViewDidEnter() {
     // this.sales = await this.saleService.getList();
-    this.balanceTotal = await this.balanceService.getUserBalance(1);
+    // this.balanceTotal = await this.balanceService.getUserBalance(1);
   }
 
   getSales() {
