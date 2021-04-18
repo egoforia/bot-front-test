@@ -1,5 +1,6 @@
 import { FormGroup } from "@angular/forms";
 import { Sale } from "../api-interfaces/sale";
+import { DateFactory } from "./date-factory";
 
 export class SaleFactory {
 
@@ -7,7 +8,7 @@ export class SaleFactory {
     return {
       code: form.controls.code.value,
       price: form.controls.price.value,
-      date: form.controls.date.value
+      date: DateFactory.convertToDate(form.controls.date.value)
     };
   }
 }
