@@ -18,7 +18,7 @@
     </ion-row>
 
     <div>
-      <app-sale-item *ngFor="let sale of sales" [sale]="sale"></app-sale-item>
+      <app-sale-item *ngFor="let sale of (sales$ | async | keyvalue)" [sale]="sale.value"></app-sale-item>
     </div>
   </ion-grid>
 

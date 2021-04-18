@@ -19,6 +19,7 @@ import { environment } from '../environments/environment';
 import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './effects/auth.effects';
+import { SaleEffects } from './effects/sale.effects';
 
 registerLocaleData(ptBr);
 
@@ -34,7 +35,7 @@ registerLocaleData(ptBr);
     HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects, SaleEffects])
   ],
   providers: [
     { 

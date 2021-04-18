@@ -7,14 +7,17 @@ import {
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
 import { authReducer, AuthState } from './auth.reducer';
+import { saleReducer, SaleState } from './sale.reducer';
 
 
 export interface State {
-  auth: AuthState
+  auth: AuthState,
+  saleState: SaleState
 }
 
 export const reducers: ActionReducerMap<State> = {
-  auth: authReducer
+  auth: authReducer,
+  saleState: saleReducer
 };
 
 // export const selectAuth = (state: State) => state.auth;
