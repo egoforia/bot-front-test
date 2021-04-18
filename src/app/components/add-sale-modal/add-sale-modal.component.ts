@@ -1,7 +1,9 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { Sale } from 'src/app/api-interfaces/sale';
+import { DateFactory } from 'src/app/factories/date-factory';
 import { SaleFactory } from 'src/app/factories/sale-factory';
 import { SaleService } from 'src/app/services/sale.service';
 
@@ -22,12 +24,30 @@ export class AddSaleModalComponent implements OnInit {
 
   form: FormGroup;
 
+  dateMask = [ /\d/,  /\d/, '/',  /\d/,  /\d/, '/',  /\d/,  /\d/,  /\d/,  /\d/ ];
+
   ngOnInit() {
     this.form = this.fb.group({
       'code':   [ null, [ Validators.required ] ],
       'price':  [ null, [ Validators.required ] ],
-      'date':   [ null, [ Validators.required ] ]
+      'date':   [ null, [ Validators.required, this.dateValidation ] ]
     });
+  }
+
+  dateValidation(control: AbstractControl): ValidationErrors | null {
+    if (!control.value) { 
+      return null; 
+    } else if (control.value.length !== 10) {
+      return { date: 'Data não é válida' };
+    }
+
+    const date = DateFactory.convertToDate(control.value);
+    
+    if (date instanceof Date && !isNaN(date.getTime())) {
+      return null;
+    } else {
+      return { date: 'Data não é válida' };
+    }
   }
 
   dismiss() {
