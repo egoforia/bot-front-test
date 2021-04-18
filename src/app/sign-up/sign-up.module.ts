@@ -8,6 +8,7 @@ import { SignUpPageRoutingModule } from './sign-up-routing.module';
 
 import { SignUpPage } from './sign-up.page';
 import { IonMask } from '../directive/ion-mask';
+import { SharedModule } from '../shared.module';
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import { IonMask } from '../directive/ion-mask';
     FormsModule,
     IonicModule,
     SignUpPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
-  declarations: [SignUpPage, IonMask]
+  declarations: [SignUpPage]
 })
 export class SignUpPageModule {}

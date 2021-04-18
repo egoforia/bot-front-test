@@ -4,6 +4,7 @@ import { AddSaleModalComponent } from './add-sale-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { IonMask } from 'src/app/directive/ion-mask';
+import { SharedModule } from 'src/app/shared.module';
 
 
 
@@ -12,9 +13,10 @@ import { IonMask } from 'src/app/directive/ion-mask';
     CommonModule,
     FormsModule,
     IonicModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
-  declarations: [AddSaleModalComponent, IonMask],
+  declarations: [AddSaleModalComponent],
   exports: [AddSaleModalComponent],
 })
 export class AddSaleModalModule { }
