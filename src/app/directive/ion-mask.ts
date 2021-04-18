@@ -21,10 +21,10 @@ import { createTextMaskInputElement } from 'text-mask-core';
 export class IonMask implements OnInit, OnDestroy {
 
   @Input('ionMask')
-  public mask: Array<any>    = [];
+  public mask: false | (string | RegExp)[] | ((raw: string) => (string | RegExp)[]) = [];
   private onDestroy: Subject<void> = new Subject<void>();
 
-  private lastMask: Array<any> = [];
+  private lastMask: false | (string | RegExp)[] | ((raw: string) => (string | RegExp)[]) = [];
 
   constructor(public ionInput: IonInput) {}
 
