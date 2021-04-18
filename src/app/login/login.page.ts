@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { User } from '../api-interfaces/user';
-import { AuthService } from '../services/auth.service';
+import { Store } from '@ngrx/store';
+import { login } from '../actions/auth.actions';
+import { AuthState } from '../reducers/auth.reducer';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +13,9 @@ import { AuthService } from '../services/auth.service';
 export class LoginPage implements OnInit {
 
   constructor(
-    private authService: AuthService,
-    private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private store: Store<{ authState: AuthState }>
   ) { }
 
   form: FormGroup;
@@ -43,38 +41,8 @@ export class LoginPage implements OnInit {
 
   async submit() {
     if (this.form.valid) {
-      const loading = await this.loadingCtrl.create({ message: 'Aguarde um momento' });
-      loading.present();
-      
-      // set timeout para simular demora de uma requisição real
-      setTimeout(() => {
-        this.authService.login(this.email.value, this.password.value)
-          .then(async (user: User) => {
-            const toast = await this.toastCtrl.create({
-              message: `Bem vindo de volta, ${user.name}!`,
-              color: 'success',
-              duration: 2000,
-              position: 'top'
-            });
-  
-            toast.present();
-            this.router.navigate(['home'], { replaceUrl: true });
-          })
-          .catch(async e => {
-            // toast para simular mensagem de erro de autenticação
-            const toast = await this.toastCtrl.create({
-              message: `Email ou senha incorretos. Por favor, tente novamente.`,
-              color: 'danger',
-              duration: 2000,
-              position: 'top'
-            });
-  
-            toast.present();
-          })
-          .finally(() => {
-            loading.dismiss();
-          });
-      }, 600);
+
+      this.store.dispatch(login({ email: this.email.value, password: this.password.value }));
     }
   }
 
