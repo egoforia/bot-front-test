@@ -9,5 +9,8 @@
     { "id": 1, "user_id": 1, "code": "BOTI0001", "price": 99.99, "date": "2021-04-15", "cashback": 9.99, "status": "WAITING" },
     { "id": 2, "user_id": 1, "code": "BOTI0002", "price": 99.99, "date": "2021-04-15", "cashback": 9.99, "status": "DENIED" },
     { "id": 3, "user_id": 1, "code": "BOTI0003", "price": 99.99, "date": "2021-04-15", "cashback": 9.99, "status": "APPROVED" }
+  ],
+  "balances": [
+    { "id": 1, "user_id": 1, "total": 299.27 }
   ]
 }
