@@ -1,7 +1,7 @@
 import * as fromBalance from './balance.actions';
 
-describe('loadBalances', () => {
+describe('loadBalance', () => {
   it('should return an action', () => {
-    expect(fromBalance.loadBalances().type).toBe('[Balance] Load Balances');
+    expect(fromBalance.loadBalance().type).toBe('[Balance] Load Balance');
   });
 });

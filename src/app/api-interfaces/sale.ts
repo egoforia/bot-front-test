@@ -10,5 +10,5 @@ export interface Sale {
   price: number;
   date: Date;
   cashback?: number;
-  status?: SaleStatus
+  status?: string | SaleStatus;
 }

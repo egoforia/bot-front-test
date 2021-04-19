@@ -5,7 +5,7 @@ import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { EMPTY, Observable, of } from 'rxjs';
 import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
-import { loginComplete, loginFailed } from '../actions/auth.actions';
+import { loginComplete, loginFailed, signUpComplete, signUpFailed } from '../actions/auth.actions';
 import { User } from '../api-interfaces/user';
 import { AuthState } from '../reducers/auth.reducer';
 import { AuthService } from '../services/auth.service';
@@ -24,7 +24,7 @@ export class AuthEffects {
     private router: Router
   ) {}
 
-  loading: Promise<HTMLIonLoadingElement>;
+  loading: any;
 
   login$ = createEffect(() =>
     this.actions$.pipe(
@@ -34,7 +34,9 @@ export class AuthEffects {
           message: 'Aguarde um momento'
         });
 
-        this.loading.then((loading) => loading.present());
+        if (this.loading) {
+          this.loading.then((loading) => loading.present());
+        }
 
         return this.authService.login(action.email, action.password).pipe(
           map(user => loginComplete({ user: { ...user, name: 'John Doe' } })),
@@ -49,11 +51,54 @@ export class AuthEffects {
       ofType('[Auth] Login Complete'),
       concatLatestFrom(action => this.store.select(state => state.auth)),
       tap(async ([action, authState]) => {
-        this.loading.then(loading => loading.dismiss());
+        if (this.loading) {
+          this.loading.then(loading => loading.dismiss());
+        }
         
         if (authState.isAuthenticated) {
           const toast = await this.toastCtrl.create({
             message: `Bem vindo de volta, ${authState.user.name}!`,
+            color: 'success',
+            duration: 2000,
+            position: 'top'
+          });
+          
+          toast.present();
+          this.router.navigate(['home'], { replaceUrl: true });
+        }
+      })
+    ),
+    { dispatch: false }
+  );
+
+  singUp$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType('[Auth] SignUp'),
+      exhaustMap((action: any) => {
+        this.loading = this.loadingCtrl.create({
+          message: 'Aguarde um momento'
+        });
+
+        this.loading.then((loading) => loading.present());
+
+        return this.authService.signUp(action.user).pipe(
+          map(user => signUpComplete({ user })),
+          catchError(error => of(signUpFailed({ error })))
+        )  
+      })
+    )
+  );
+
+  signUpComplete$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType('[Auth] SignUp Complete'),
+      concatLatestFrom(action => this.store.select(state => state.auth)),
+      tap(async ([action, authState]) => {
+        this.loading.then(loading => loading.dismiss());
+        
+        if (authState.isAuthenticated) {
+          const toast = await this.toastCtrl.create({
+            message: `Bem vindo ao Boti, ${authState.user.name}!`,
             color: 'success',
             duration: 2000,
             position: 'top'

@@ -1,23 +1,23 @@
 <div class="sale-item-wrapper">
-  <div class="sale-date">{{ sale.date | date:'mediumDate' }}</div>
-  <ion-card class="status-{{ sale.status.toString().toLowerCase() }}">
+  <div class="sale-date">{{ sale?.date | date:'mediumDate' }}</div>
+  <ion-card class="status-{{ sale?.status.toString().toLowerCase() }}">
     <!-- <ion-card-header>
     </ion-card-header> -->
     <ion-card-content class="ion-padding">
       <ion-row>
         <ion-col size="6">
-          #{{ sale.code }}
+          #{{ sale?.code }}
         </ion-col>
         <ion-col size="6" class="ion-text-end">
-          {{ sale.status }}
+          {{ sale?.status }}
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="6">
-          {{ sale.price | currency:'BRL' }}
+          {{ sale?.price | currency:'BRL' }}
         </ion-col>
         <ion-col size="6" class="ion-text-end">
-          {{ sale.cashback | currency:'BRL' }}
+          {{ sale?.cashback | currency:'BRL' }}
           ({{ cashbackPercentage | number:'1.0-2' }}% de cashback)
         </ion-col>
       </ion-row>

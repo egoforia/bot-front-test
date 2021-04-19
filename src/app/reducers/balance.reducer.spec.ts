@@ -1,11 +1,11 @@
-import { reducer, initialState } from './balance.reducer';
+import { balanceReducer, initialState } from './balance.reducer';
 
 describe('Balance Reducer', () => {
   describe('an unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;
 
-      const result = reducer(initialState, action);
+      const result = balanceReducer(initialState, action);
 
       expect(result).toBe(initialState);
     });

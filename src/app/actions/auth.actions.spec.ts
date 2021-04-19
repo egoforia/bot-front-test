@@ -1,7 +1,9 @@
 import * as fromAuth from './auth.actions';
 
-describe('loadAuths', () => {
+describe('Login', () => {
   it('should return an action', () => {
-    expect(fromAuth.loadAuths().type).toBe('[Auth] Load Auths');
+    const email = 'john@doe.com';
+    const password = '12341234';
+    expect(fromAuth.login({ email, password }).type).toBe('[Auth] Login');
   });
 });
