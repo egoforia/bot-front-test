@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { Balance } from '../api-interfaces/balance';
 
 import { BalanceService } from './balance.service';
 
@@ -24,8 +25,8 @@ describe('BalanceService', () => {
   });
 
   describe('getUserBalance', () => {
-    it('should return an Observable<User>', () => {
-      const stubValue = { id: 1, user_id: 1, total: 999.99 };
+    it('should return an Observable<Balance>', () => {
+      const stubValue: Balance = { id: 1, user_id: 1, total: 999.99 };
 
       httpClientSpy.get.and.returnValue(of(stubValue));
 
