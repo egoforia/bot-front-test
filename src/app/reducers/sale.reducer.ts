@@ -8,21 +8,23 @@ export const saleFeatureKey = 'sale';
 
 export interface SaleState extends EntityState<Sale> {
   lastId: number | null;
+  isLoading: boolean;
 }
 
 export const adapter: EntityAdapter<Sale> = createEntityAdapter<Sale>();
 
 export const initialState: SaleState = adapter.getInitialState({
-  lastId: null
+  lastId: null,
+  isLoading: false
 });
 
 
 const reducer = createReducer(
   initialState,
-  on(loadSales, (state: SaleState) => { return { ...state }; }),
+  on(loadSales, (state: SaleState) => { return { ...state, isLoading: true }; }),
   on(loadSalesComplete, (state: SaleState, { sales }) => {
     const maxId = Math.max(...sales.map(s => s.id));
-    return adapter.setAll(sales, { ...state, lastId: maxId });
+    return adapter.setAll(sales, { ...state, isLoading: false, lastId: maxId });
   }),
   on(createSaleComplete, (state: SaleState, { sale }) => {
     return adapter.addOne(

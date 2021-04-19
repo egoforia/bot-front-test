@@ -27,12 +27,12 @@ export class HomePage implements OnInit {
     private readonly store: Store<{ saleState: SaleState, balanceState: BalanceState }>
   ) {}
 
-  sales$: Observable<Dictionary<Sale>>;
-  balance$: Observable<Balance>;
+  saleState$: Observable<SaleState>;
+  balanceState$: Observable<BalanceState>;
 
   ngOnInit() {
-    this.sales$ = this.store.select(state => state.saleState.entities);
-    this.balance$ = this.store.select(state => state.balanceState.balance);
+    this.saleState$ = this.store.select(state => state.saleState);
+    this.balanceState$ = this.store.select(state => state.balanceState);
     this.store.dispatch(loadSales());
     this.store.dispatch(loadBalance());
   }
