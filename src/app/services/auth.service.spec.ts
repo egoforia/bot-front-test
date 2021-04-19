@@ -39,5 +39,24 @@ describe('AuthService', () => {
 
       expect(httpClientSpy.post.calls.count()).toBe(1, 'one call');
     });
-  })
+  });
+
+  describe('sign up', () => {
+    it('should return an Observable<User>', () => {
+      const name = 'John Doe';
+      const cpf = '001.002.003-04';
+      const email = 'john@doe.com';
+      const password = '12341234';
+      const stubUser = { name, cpf, email, password };
+
+      httpClientSpy.post.and.returnValue(of(stubUser));
+
+      service.signUp(stubUser).subscribe(
+        user => expect(user).toEqual(stubUser, 'expected user'),
+        fail
+      )
+
+      expect(httpClientSpy.post.calls.count()).toBe(1, 'one call');
+    });
+  });
 });
