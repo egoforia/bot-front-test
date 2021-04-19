@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Nova compra</ion-title>
+    <ion-title color="medium" mode="ios">Nova compra</ion-title>
     <ion-buttons slot="end">
       <ion-button shape="round" size="large" (click)="dismiss()">
         <ion-icon name="close-outline"></ion-icon>
@@ -9,39 +9,37 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid fixed>
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <ion-list>
-        <!-- id -->
-        <ion-item>
-          <ion-label position="stacked">Código da compra</ion-label>
-          <ion-input formControlName="code" type="text" placeholder="Digite aqui"></ion-input>
-        </ion-item>
-        <ion-label color="danger" class="error-message" *ngIf="code.invalid && code.dirty">
-          <span *ngIf="code.errors.required">Este é um campo obrigatório</span>
-        </ion-label>
-        <!-- price -->
-        <ion-item>
-          <ion-label position="stacked">Valor</ion-label>
-          <ion-input formControlName="price" type="number" placeholder="Digite aqui"></ion-input>
-        </ion-item>
-        <ion-label color="danger" class="error-message" *ngIf="price.invalid && price.dirty">
-          <span *ngIf="price.errors.required">Este é um campo obrigatório</span>
-        </ion-label>
-        <!-- date -->
-        <ion-item>
-          <ion-label position="stacked">Data</ion-label>
-          <ion-input formControlName="date" placeholder="Digite aqui" [ionMask]="dateMask"></ion-input>
-        </ion-item>
-        <ion-label color="danger" class="error-message" *ngIf="date.invalid && date.dirty">
-          <span *ngIf="date.errors.required">Este é um campo obrigatório</span>
-          <span *ngIf="date.errors.date">Data não é válida</span>
-        </ion-label>
-        <ion-button expand="block" type="submit" [disabled]="form.invalid">
-          <ion-label>Cadastrar</ion-label>
-        </ion-button>
-      </ion-list>
-    </form>
-  </ion-grid>
-</ion-content>
+<div class="modal-content ion-padding-horizontal">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-list class="ion-padding-bottom">
+      <!-- code -->
+      <ion-item>
+        <ion-label position="stacked">Código da compra</ion-label>
+        <ion-input formControlName="code" type="text" placeholder="Digite aqui"></ion-input>
+      </ion-item>
+      <ion-label color="danger" class="error-message" *ngIf="code.invalid && code.dirty">
+        <span *ngIf="code.errors.required">Este é um campo obrigatório</span>
+      </ion-label>
+      <!-- price -->
+      <ion-item class="ion-margin-top">
+        <ion-label position="stacked">Valor</ion-label>
+        <ion-input formControlName="price" type="number" placeholder="Digite aqui"></ion-input>
+      </ion-item>
+      <ion-label color="danger" class="error-message" *ngIf="price.invalid && price.dirty">
+        <span *ngIf="price.errors.required">Este é um campo obrigatório</span>
+      </ion-label>
+      <!-- date -->
+      <ion-item class="ion-margin-top">
+        <ion-label position="stacked">Data</ion-label>
+        <ion-input formControlName="date" placeholder="Digite aqui" [ionMask]="dateMask"></ion-input>
+      </ion-item>
+      <ion-label color="danger" class="error-message" *ngIf="date.invalid && date.dirty">
+        <span *ngIf="date.errors.required">Este é um campo obrigatório</span>
+        <span *ngIf="date.errors.date">Data não é válida</span>
+      </ion-label>
+      <ion-button class="ion-margin-top" expand="block" type="submit" [disabled]="form.invalid">
+        <ion-label>Cadastrar</ion-label>
+      </ion-button>
+    </ion-list>
+  </form>
+</div>
