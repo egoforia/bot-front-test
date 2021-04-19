@@ -25,6 +25,18 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@import "./theme/ion-input.scss";
+
 .w-100 {
   width: 100%;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
 }
