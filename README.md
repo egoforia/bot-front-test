@@ -5,6 +5,13 @@
 #### Antes de iniciar o front-end, foi feita uma análise da solução atual a fim de entender os fluxos, UI components utilizados e propriedades css
 #### Link: [Análise de UI/UX/Design System](https://whimsical.com/analise-de-ui-ux-design-system-EZH6nBs4kASe6ueQV61ZhX)
 
+---
+
+# Live Preview
+#### É possível testar através do link: https://bot-front-test.web.app
+
+---
+
 # Libs utilizadas
 - [Ionic](https://ionicframework.com/docs)
 - [Angular](https://angular.io/)
@@ -36,6 +43,11 @@
 ### Home Page
 #### Tela principal do sistema onde é possível ver a lista de vendas do revendedor, o saldo de cashback e cadastrar uma nova venda
 
+
+---
+
+# Git
+#### Foi utilizado o [Git Flow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) para melhor organização de branches
 
 ---
 
