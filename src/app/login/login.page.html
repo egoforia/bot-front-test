@@ -17,6 +17,7 @@
           </ion-item>
           <ion-label color="danger" class="error-message" *ngIf="email.invalid && email.dirty">
             <span *ngIf="email.errors.required">Este é um campo obrigatório</span>
+            <span *ngIf="email.errors.email">Email inválido</span>
           </ion-label>
           <!-- password -->
           <ion-item class="ion-margin-top">
