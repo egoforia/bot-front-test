@@ -17,27 +17,20 @@ describe('AuthEffects', () => {
   let actions$: Observable<Action>;
   let effects: AuthEffects;
 
-  // let routerSpy: { navigate: jasmine.Spy };
-
   let authSpyService: { login: jasmine.Spy };
 
   let loadingSpyCtrl = {
     create: jasmine.createSpy('create')
   };
 
-  let router: Router;
-
-
   let store: MockStore;
   const initialState = { auth: { isAuthencticated: false, user: null, errorMessage: null } };
 
   beforeEach(() => {
     authSpyService  = jasmine.createSpyObj('AuthService', [ 'login' ]);
-    // routerSpy       = jasmine.createSpyObj('Router', [ 'navigate' ]);
 
     TestBed.configureTestingModule({
       imports: [
-        // AppRoutingModule,
         HttpClientModule,
         IonicModule,
         StoreModule.forRoot(reducers, { metaReducers }),
@@ -56,8 +49,6 @@ describe('AuthEffects', () => {
     effects = TestBed.inject(AuthEffects);
 
     store = TestBed.inject(MockStore);
-
-    router = TestBed.inject(Router);
   });
 
   it('should be created', () => {
