@@ -48,7 +48,8 @@ export class HomePage implements OnInit {
 
   async presentAddSaleModal() {
     const modal = await this.modalCtrl.create({
-      component: AddSaleModalComponent
+      component: AddSaleModalComponent,
+      cssClass: 'h-auto'
     });
 
     modal.onWillDismiss()

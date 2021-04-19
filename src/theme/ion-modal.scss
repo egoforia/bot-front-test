@@ -1,0 +1,31 @@
+ion-modal {
+  &.h-auto {
+    --height: auto;
+
+    ion-header {
+      ion-toolbar:first-of-type {
+        padding-top: 0px;
+      }
+    }
+
+    .modal-wrapper{
+      // width: 90vw;
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-top: var(--ion-safe-area-top, 0);
+      margin-bottom: var(--ion-safe-area-bottom, 0);
+      border-radius: 4px;
+      box-shadow: 1px 4px 5px rgba(31, 31, 31, 0.25);
+
+      .ion-page {
+        position: relative;
+        contain: content;
+        max-height: 90vh;
+
+        .modal-content {
+          overflow: auto;
+        }
+      }
+    }
+  }
+}
