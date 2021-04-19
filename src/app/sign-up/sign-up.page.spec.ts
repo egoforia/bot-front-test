@@ -2,7 +2,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from '../app-routing.module';
+import { reducers, metaReducers } from '../reducers';
 
 import { SignUpPage } from './sign-up.page';
 
@@ -18,7 +20,8 @@ describe('SignUpPage', () => {
         IonicModule.forRoot(),
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        StoreModule.forRoot(reducers, { metaReducers })
       ]
     }).compileComponents();
 
