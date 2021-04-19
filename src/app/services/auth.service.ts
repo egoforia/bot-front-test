@@ -13,15 +13,15 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  signUp(user: User): Promise<User> {
+  signUp(user: User): Observable<User> {
     const endpoint = 'users';
 
-    return this.http.post(environment.apiUrl + endpoint, user)
-      .toPromise()
-      .then((user: any) => {
-        if (user) { return user; }
-        else { throw new Error('Sign up failed'); }
-      });
+    return this.http.post<User>(environment.apiUrl + endpoint, user);
+      // .toPromise()
+      // .then((user: any) => {
+      //   if (user) { return user; }
+      //   else { throw new Error('Sign up failed'); }
+      // });
   }
 
   login(email: string, password: string): Observable<User> {

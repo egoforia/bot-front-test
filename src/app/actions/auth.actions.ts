@@ -16,6 +16,19 @@ export const loginFailed = createAction(
   props<{ error: any }>()
 )
 
+export const signUp = createAction(
+  '[Auth] SignUp',
+  props<{ user: User }>()
+);
 
+export const signUpComplete = createAction(
+  '[Auth] SignUp Complete',
+  props<{ user: User }>()
+)
+
+export const signUpFailed = createAction(
+  '[Auth] SignUp Failed',
+  props<{ error: any }>()
+)
 
 
