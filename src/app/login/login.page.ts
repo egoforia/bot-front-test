@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { login } from '../actions/auth.actions';
+import { AuthState } from '../reducers/auth.reducer';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,8 @@ export class LoginPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private store: Store<{ authState: AuthState }>
   ) { }
 
   form: FormGroup;
@@ -35,9 +39,10 @@ export class LoginPage implements OnInit {
     this.router.navigate(['sign-up']);
   }
 
-  submit() {
+  async submit() {
     if (this.form.valid) {
-      this.router.navigate(['home'], { replaceUrl: true });
+
+      this.store.dispatch(login({ email: this.email.value, password: this.password.value }));
     }
   }
 

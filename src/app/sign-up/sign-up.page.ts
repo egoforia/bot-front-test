@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { MASKS, NgBrazilValidators } from 'ng-brazil';
+import { signUp } from '../actions/auth.actions';
+import { AuthFactory } from '../factories/auth-factory';
+import { AuthState } from '../reducers/auth.reducer';
 import { MustMatch } from '../validators/must-match.validator';
 
 @Component({
@@ -15,7 +19,8 @@ export class SignUpPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private store: Store<{ authState: AuthState }>
   ) { }
 
   form: FormGroup;
@@ -56,9 +61,11 @@ export class SignUpPage implements OnInit {
     this.router.navigate(['login']);
   }
 
-  submit() {
+  async submit() {
     if (this.form.valid) {
+      const user = AuthFactory.buildUserFromForm(this.form);
 
+      this.store.dispatch(signUp({ user }));
     }
   }
 }

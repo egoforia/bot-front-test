@@ -5,9 +5,10 @@ export enum SaleStatus {
 }
 
 export interface Sale {
-  id: number;
+  id?: number;
+  code: string;
   price: number;
   date: Date;
-  cashback: number;
-  status: SaleStatus
+  cashback?: number;
+  status?: string | SaleStatus;
 }

@@ -1,0 +1,9 @@
+ion-spinner {
+  &[size="small"] {
+    height: 1rem;
+  }
+
+  &[size="large"] {
+    height: 5rem;
+  }
+}

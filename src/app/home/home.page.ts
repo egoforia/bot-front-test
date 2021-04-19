@@ -1,7 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { loadSales } from '../actions/sale.actions';
 import { Sale, SaleStatus } from '../api-interfaces/sale';
 import { AddSaleModalComponent } from '../components/add-sale-modal/add-sale-modal.component';
+import { SaleState, selectAllSales } from '../reducers/sale.reducer';
+import { BalanceService } from '../services/balance.service';
+import { SaleService } from '../services/sale.service';
+
+import * as fromSales from '../reducers/sale.reducer';
+import { Dictionary } from '@ngrx/entity';
+import { Balance } from '../api-interfaces/balance';
+import { loadBalance } from '../actions/balance.actions';
+import { BalanceState } from '../reducers/balance.reducer';
 
 @Component({
   selector: 'app-home',
@@ -11,23 +23,41 @@ import { AddSaleModalComponent } from '../components/add-sale-modal/add-sale-mod
 export class HomePage implements OnInit {
 
   constructor(
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private readonly store: Store<{ saleState: SaleState, balanceState: BalanceState }>
   ) {}
 
-  sales: Sale[] = [
-    { id: 1, price: 99.99, date: new Date('2021-04-15'), cashback: 9.99, status: SaleStatus.WAITING },
-    { id: 2, price: 99.99, date: new Date('2021-04-15'), cashback: 9.99, status: SaleStatus.DENIED },
-    { id: 3, price: 99.99, date: new Date('2021-04-15'), cashback: 9.99, status: SaleStatus.APPROVED },
-  ]
+  saleState$: Observable<SaleState>;
+  balanceState$: Observable<BalanceState>;
 
   ngOnInit() {
+    this.saleState$ = this.store.select(state => state.saleState);
+    this.balanceState$ = this.store.select(state => state.balanceState);
+    this.store.dispatch(loadSales());
+    this.store.dispatch(loadBalance());
+  }
+
+  async ionViewDidEnter() {
+    // this.sales = await this.saleService.getList();
+    // this.balanceTotal = await this.balanceService.getUserBalance(1);
+  }
+
+  getSales() {
 
   }
 
   async presentAddSaleModal() {
     const modal = await this.modalCtrl.create({
-      component: AddSaleModalComponent
+      component: AddSaleModalComponent,
+      cssClass: 'h-auto'
     });
+
+    modal.onWillDismiss()
+      .then(response => {
+        // if (response.data && response.data.sale) {
+        //   this.sales.push(response.data.sale);
+        // }
+      });
 
     modal.present();
   }
