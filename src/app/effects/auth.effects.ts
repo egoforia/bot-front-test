@@ -24,7 +24,7 @@ export class AuthEffects {
     private router: Router
   ) {}
 
-  loading: Promise<HTMLIonLoadingElement>;
+  loading: any;
 
   login$ = createEffect(() =>
     this.actions$.pipe(
@@ -34,7 +34,9 @@ export class AuthEffects {
           message: 'Aguarde um momento'
         });
 
-        this.loading.then((loading) => loading.present());
+        if (this.loading) {
+          this.loading.then((loading) => loading.present());
+        }
 
         return this.authService.login(action.email, action.password).pipe(
           map(user => loginComplete({ user: { ...user, name: 'John Doe' } })),
@@ -49,7 +51,9 @@ export class AuthEffects {
       ofType('[Auth] Login Complete'),
       concatLatestFrom(action => this.store.select(state => state.auth)),
       tap(async ([action, authState]) => {
-        this.loading.then(loading => loading.dismiss());
+        if (this.loading) {
+          this.loading.then(loading => loading.dismiss());
+        }
         
         if (authState.isAuthenticated) {
           const toast = await this.toastCtrl.create({
